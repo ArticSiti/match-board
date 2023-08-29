@@ -1,4 +1,5 @@
 <script lang="ts" setup="">
+import TheBanner from "../components/UI/TheBanner.vue";
 //props
 //computed
 //data
@@ -8,6 +9,9 @@
 </script>
 <template>
 	<div>
+		<client-only>
+			<TheBanner/>
+		</client-only>
 		<TheLeagues/>
 		<TheTeams/>
 	</div>

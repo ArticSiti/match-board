@@ -13,7 +13,5 @@
 </script>
 
 <style lang="scss" scoped>
-.main {
-	margin: 100px 0 100px;
-}
+
 </style>

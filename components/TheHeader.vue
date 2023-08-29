@@ -1,4 +1,4 @@
-<script lang="ts" setup="">
+<script lang="ts" setup>
 
 //props
 //computed
@@ -10,11 +10,29 @@
 //methods
 </script>
 <template>
-	<div>
-		<h2>Header</h2>
+<header class="header">
+<div class="header__wrapper">
+	<div class="header__nav">
+		<nav>
+			<ul>
+				<li>
+					<nuxt-link to="/">Статистика</nuxt-link>
+				</li>
+				<li>
+					<nuxt-link to="/"></nuxt-link>
+				</li>
+				<li>
+					<nuxt-link to="/"></nuxt-link>
+				</li>
+				<li>
+					<nuxt-link to="/"></nuxt-link>
+				</li>
+			</ul>
+		</nav>
 	</div>
+</div>
+</header>
 </template>
-
 <style lang="scss" scoped>
 
 </style>

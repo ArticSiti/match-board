@@ -1,0 +1,85 @@
+<script lang="ts" setup>
+//props
+const props = defineProps({
+	card: {
+		type: Object
+	}
+})
+const {card} = toRefs(props)
+//computed
+
+//data
+//useFetch
+//onMounted
+//methods
+</script>
+<template>
+	<div class="card">
+			<div class="card__contain">
+				<div class="card__preview">
+					<img :src="card.image_path" :alt="card.name" v-lazy-load/>
+				</div>
+				<div class="card__title">
+					<h2>{{ card.name }}</h2>
+				</div>
+				<div class="card__founded">
+					<p>Основан: {{ card.founded }}</p>
+					<p>Последняя игра команды: </p>
+					<p>{{ card.last_played_at }}</p>
+				</div>
+			</div>
+	</div>
+</template>
+
+<style lang="scss" scoped>
+.card {
+	height: 100%;
+	padding: 10px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: .3s;
+	box-shadow: 4px 6px 10px rgba($black, .5);
+	background-color: rgba($bg-color,.4);
+
+	&:hover {
+		box-shadow: none;
+		background-color: $bg-color;
+	}
+
+	p {
+		color: $black;
+	}
+
+	&__preview {
+		display: flex;
+		justify-content: center;
+
+		img {
+			width: 100px;
+			height: 100px;
+			object-fit: contain;
+		}
+	}
+
+	&__title {
+		margin: 8px 0;
+		text-align: center;
+
+		h2 {
+			@include f-s(r-size(24px), 400)
+		}
+	}
+
+	&__founded {
+		margin: 12px 0;
+
+		p {
+			margin-top: 4px;
+
+			&:last-child {
+				margin-top: 12px;
+			}
+		}
+	}
+}
+</style>

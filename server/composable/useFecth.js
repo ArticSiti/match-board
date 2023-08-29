@@ -1,7 +1,7 @@
 import {ref} from 'vue'
 
-export default function useFetch(url, options = {}) {
-	const data = ref(null)
+export default function useFetch(url,page, options = {}) {
+	const data = ref([])
 	const error = ref(null)
 	const loading = ref(false)
 	const {signal, abort} = new AbortController()
@@ -17,7 +17,7 @@ export default function useFetch(url, options = {}) {
 	}
 	const fetchData = async () => {
 		try {
-			const res  = await fetch(`${baseUrl}${url}${apiKey}`,{signal, ...options})
+			const res  = await fetch(`${baseUrl}${url}${apiKey}&per_page=8&page=${page ? page : 1}`,{signal, ...options})
 			if(!res.ok){
 				error.value = "could not fetch data"
 			}

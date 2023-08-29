@@ -1,19 +1,32 @@
 <script lang="ts" setup="">
-import useFetch from '../server/composable/useFecth'
+import useFetch from '../../server/composable/useFecth'
+import {ref} from 'vue'
 import TheCard from "@/components/TheCard.vue";
+import ThePagination from "../components/UI/ThePagination.vue";
+import {paginateStore} from '~/store/paginate'
+import {storeToRefs} from 'pinia'
+
+const paginateData = paginateStore()
+let {paginateCurrent} = storeToRefs(paginateData)
 //props
 //computed
 
 //data
-
+let teamsData = ref([])
 const {data: teams, loading: isLoading, fetchData: fetchTeams} = useFetch('football/teams')
 //useFetch
 //onMounted
 onMounted(async () => {
 	!teams.value.length ? await fetchTeams() : false
+	teamsData.value = teams.value.data
 })
 //methods
-
+let paginationCount = async () => {
+	let currentTotal = paginateCurrent.value
+	const {data: teams, loading: isLoading, fetchData: fetchTeams} = useFetch('football/teams',`${paginateCurrent.value}`)
+	await fetchTeams()
+	teamsData.value = teams.value.data
+}
 </script>
 <template>
 	<div class="teams container">
@@ -24,15 +37,12 @@ onMounted(async () => {
 					<h2>Список команд</h2>
 				</div>
 				<div class="teams__card">
-					<div class="teams__card-contain" v-for="item in teams.data?.slice(0,8)" :key="item.id">
-						<nuxt-link :to="`/category/teams/${item.id}`">
-							<TheCard :card="item"/>
-						</nuxt-link>
-					</div>
+					<TheCard v-for="item in teamsData" :key="item.id" :card="item"/>
 				</div>
-				<div class="teams__button">
-					<nuxt-link to="/category">Смотреть больше</nuxt-link>
-				</div>
+				<ThePagination :total-pages="teamsData.length"
+				               @selectedCount="paginationCount"
+				               @prevCount="paginationCount"
+				               @nextCount="paginationCount"/>
 			</div>
 		</transition>
 	</div>

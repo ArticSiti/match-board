@@ -8,12 +8,12 @@
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 }
+
 html,
 body,
 #__nuxt,
 #__layout {
   height: 100%;
-  background-color: $bg-color;
   //overflow-x: hidden;
   font-family: 'Lato', sans-serif, -apple-system;
   @include font-rem(16);
@@ -44,10 +44,16 @@ button {
 li {
   list-style: none;
 }
+
 .container {
-  width: min(100% - 20px, 1750px);
+  width: min(100% - 20px, 1050px);
   margin-inline: auto;
 }
-.hidden{
+
+.hidden {
   overflow: hidden;
+}
+
+.title {
+  @include f-s(r-size(24px), 600)
 }

@@ -23,9 +23,6 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
     ],
   },
-  plugins: [
-    { src: '~/plugins/axios', mode: 'client' },
-  ],
   runtimeConfig: {
     // Keys within public, will be also exposed to the client-side
     public: {
