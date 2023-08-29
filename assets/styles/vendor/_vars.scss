@@ -1,0 +1,66 @@
+@use "sass:math";
+
+$black: #000;
+$bg-color: #e4e2e2;
+$base-font-size: 16px;
+//Обычные стили
+@mixin shows {
+  animation: shows .3s;
+  @keyframes shows {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+@mixin tablet-max{
+  @media (min-width: 1250px) {
+    @content
+  }
+}
+@mixin tablet {
+  @media (max-width: 1250px) {
+    @content
+  }
+}
+
+@mixin tablet-min {
+  @media (max-width: 960px) {
+    @content
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content
+  }
+}
+
+@mixin ipad {
+  @media (max-width: 640px) {
+    @content
+  }
+}
+
+@mixin mobile-min {
+  @media (max-width: 540px) {
+    @content
+  }
+}
+
+
+@mixin font-rem($font) {
+  $base-font-size: $font + px;
+  font-size: $base-font-size;
+}
+
+@function r-size($px-size) {
+  $rem-size: math.div($px-size, $base-font-size);
+  @return #{$rem-size}rem;
+}
+@mixin f-s($font,$f-weight) {
+  font-size: $font;
+  font-weight: $f-weight;
+}
