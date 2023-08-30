@@ -99,14 +99,19 @@ let previousPage = () => {
 			align-items: center;
 			cursor: pointer;
 			font-weight: 700;
-			font-size: 20px;
+			@include f-s(r-size(16px),400);
 			border-radius: 12px;
 			background-color: #54b635;
 			color: #fff;
+			@include tablet-min{
+				width: 25px;
+				height: 25px;
+			}
 		}
 
 		&-wrapper {
 			display: flex;
+			align-items: center;
 			gap: 10px;
 		}
 	}

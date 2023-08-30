@@ -10,9 +10,9 @@
 //methods
 </script>
 <template>
-	<header class="header">
-		<div class="header__wrapper container">
-			<nav class="header__nav">
+	<footer class="footer">
+		<div class="footer__wrapper container">
+			<nav class="footer__nav">
 				<ul>
 					<li>
 						<nuxt-link to="/">Главная</nuxt-link>
@@ -26,10 +26,10 @@
 				</ul>
 			</nav>
 		</div>
-	</header>
+	</footer>
 </template>
 <style lang="scss" scoped>
-.header {
+.footer {
 	width: 100%;
 	background-color: #ffffff;
 	z-index: 150;

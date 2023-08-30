@@ -37,6 +37,9 @@ onMounted(() => {
 	height: 1000px;
 	overflow: hidden;
 	overflow-y: scroll;
+	@include tablet-min{
+		height: 100%;
+	}
 
 	&::-webkit-scrollbar-thumb {
 		background: none;

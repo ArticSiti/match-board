@@ -66,6 +66,7 @@
 			z-index: 10;
 			@include f-s(r-size(42px), 600);
 			color: #fff;
+
 		}
 	}
 }

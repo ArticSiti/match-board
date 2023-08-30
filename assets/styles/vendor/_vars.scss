@@ -18,17 +18,6 @@ $base-font-size: 16px;
     }
   }
 }
-@mixin tablet-max{
-  @media (min-width: 1250px) {
-    @content
-  }
-}
-@mixin tablet {
-  @media (max-width: 1250px) {
-    @content
-  }
-}
-
 @mixin tablet-min {
   @media (max-width: 960px) {
     @content

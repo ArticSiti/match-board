@@ -23,11 +23,20 @@ import TheBanner from "../components/UI/TheBanner.vue";
 	position: relative;
 	display: grid;
 	grid-template-columns: 20% 78%;
+	//grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	grid-template-areas:
     "standing-live  banner"
     "standing-live  teams-home"
-"standing-live leagues-home";
+		"standing-live leagues-home";
 	gap: 10px;
+	@include tablet-min {
+		grid-template-columns: 100%;
+		grid-template-areas:
+      "banner"
+	    "standing-live"
+			"teams-home"
+			"leagues-home";
+	}
 }
 
 .banner {
@@ -38,6 +47,9 @@ import TheBanner from "../components/UI/TheBanner.vue";
 	width: 100%;
 	position: absolute;
 	grid-area: standing-live;
+	@include tablet-min{
+		position: inherit;
+	}
 }
 
 .teams-home {

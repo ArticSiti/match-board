@@ -34,7 +34,7 @@ onMounted(async () => {
 .leagues {
 	&__wrapper {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 		gap: 10px;
 		margin-bottom: 60px;
 	}

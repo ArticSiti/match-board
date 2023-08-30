@@ -24,6 +24,15 @@ onMounted(async () => {
 	!teams.value.length ? await fetchTeams() : false
 	teamsData.value = teams.value.data
 })
+// watch
+watch(
+		() => route.query,
+		async () => {
+			const {data: teams, fetchData: fetchUpdate} = useFetch(`football/${route.query.code}`)
+			await fetchUpdate()
+			teamsData.value = teams.value.data
+		},
+);
 //methods
 let paginationCount = async () => {
 	let currentTotal = paginateCurrent.value
@@ -51,7 +60,8 @@ let search = async (value: string) => {
 			<TheLoading v-if="isLoading"/>
 			<div class="teams__wrapper" v-else>
 				<div class="teams__title title">
-					<h2>Список команд</h2>
+					<h2 v-if="route.query.code === 'teams'">Список команд</h2>
+					<h2 v-else-if="route.query.code === 'leagues'">Список лиг</h2>
 				</div>
 				<div class="teams__search">
 					<input v-model="searchData" type="text" placeholder="Поиск" @input="search"/>
@@ -60,7 +70,9 @@ let search = async (value: string) => {
 					</transition>
 				</div>
 				<div class="teams__card">
-					<TheCard v-for="item in teamsData" :key="item.id" :card="item"/>
+					<nuxt-link :to="`/category/${route.query.code}/${item.id}`" v-for="item in teamsData" :key="item.id">
+						<TheCard :card="item"/>
+					</nuxt-link>
 				</div>
 				<ThePagination :total-pages="teamsData.length"
 				               @selectedCount="paginationCount"

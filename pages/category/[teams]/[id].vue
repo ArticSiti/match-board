@@ -36,27 +36,14 @@ onMounted(async () => {
 				<div class="detail__card-right">
 					<div class="detail__card-title title">
 						<h3>{{ detailData.name }}</h3>
-						<p v-if="detailData.leg">Счёт матча<span>{{ detailData.leg }}</span></p>
 					</div>
 					<div class="detail__card-time" v-if="detailData.last_played_at">
 						<p>Время последней игры: {{ detailData.last_played_at }}</p>
 						<p v-if="detailData.founded">Дата основания: {{ detailData.founded }}</p>
 						<p v-if="detailData.gender">Пол игроков: {{ detailData.gender }}</p>
 					</div>
-					<div class="detail__card-leg" v-if="detailData.leg">
-						<p>Начало матча: {{ detailData.starting_at }}</p>
-					</div>
-					<div class="detail__card-result" v-if="detailData.league_id">
-						<div class="detail__card-result-contain">
-							<p>Номер лиги:{{ detailData.league_id }}</p>
-							<p>Номер сезона:{{ detailData.season_id }}</p>
-							<div class="detail__card-description">
-								<p>Комментарий к матчу</p>
-								<p>{{ detailData.result_info }}</p>
-							</div>
-						</div>
-					</div>
 				</div>
+				<TheFixtures v-if="detailData.leg" :fixtures="detailData"/>
 			</div>
 		</transition>
 	</div>
@@ -67,9 +54,15 @@ onMounted(async () => {
 	background-color: #ffffff;
 	padding: 20px;
 	border-radius: 16px;
-	&-wrapper{
+
+	&-wrapper {
 		display: grid;
-		grid-template-columns: 10% 90%;
+		grid-template-columns: 20% 80%;
+		gap: 10px;
+		align-items: center;
+		@include tablet-min{
+			grid-template-columns: 1fr;
+		}
 	}
 
 	&-preview {
@@ -82,74 +75,43 @@ onMounted(async () => {
 	&-img {
 		width: 150px;
 		height: 150px;
+		padding: 10px;
 
 		img {
 			width: 100%;
 			height: 100%;
 			object-fit: contain;
 		}
+
+		@include tablet-min {
+			width: 50px;
+			height: 50px;
+			img {
+				width: 50px;
+				height: 50px;
+			}
+		}
 	}
 
 	&-title {
 		text-transform: uppercase;
-
-		p {
-			display: flex;
-			flex-direction: column;
+		@include tablet-min{
+			text-align: center;
+			margin: 10px 0;
 		}
 	}
 
 	&-time {
 		p {
 			@include f-s(r-size(18px), 500);
-			padding: 10px 0;
-		}
-
-	}
-
-	&-subscription {
-		padding-top: 10px;
-
-		&-title {
-			text-align: center;
-			padding-bottom: 10px;
-		}
-
-		&-bottom {
-			padding-top: 12px;
-		}
-
-		&-item {
-			display: grid;
-			grid-template-columns: 1fr 1fr 1fr;
-		}
-
-		&-list {
-			justify-self: center;
-
-			p {
-				@include f-s(r-size(18px), 500)
-			}
-
-			li {
-				padding: 10px;
-				@include f-s(r-size(16px), 500)
+			padding: 10px 0 0 10px;
+			@include tablet-min{
+				padding: 4px 0;
 			}
 		}
+
 	}
 
-	&-leg {
-		text-align: center;
-	}
 
-	&-result {
-		margin-top: 12px;
-		display: flex;
-		justify-content: center;
-
-		p {
-			margin-top: 10px;
-		}
-	}
 }
 </style>
