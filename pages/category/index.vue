@@ -23,6 +23,11 @@ const {data: teams, loading: isLoading, fetchData: fetchTeams} = useFetch(`footb
 onMounted(async () => {
 	!teams.value.length ? await fetchTeams() : false
 	teamsData.value = teams.value.data
+	document.addEventListener('click', (e) => {
+		if (!e.target.closest('.teams__search-result')) {
+			searchResult.value = []
+		}
+	})
 })
 // watch
 watch(

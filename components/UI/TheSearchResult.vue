@@ -10,11 +10,12 @@ const props = defineProps({
 //data
 //useFetch
 //onMounted
+const  route = useRoute()
 //methods
 </script>
 <template>
 	<div class="result">
-		<nuxt-link :to="`/category/teams/${item.id}`" v-for="(item,index) in result" :key="item.id">
+		<nuxt-link :to="`/category/${route.query.code}/${item.id}`" v-for="(item,index) in result" :key="item.id">
 			<div class="result__item">
 				<div class="result__item-img">
 					<img :src="item.image_path" :alt="item.name" v-lazy-load>
