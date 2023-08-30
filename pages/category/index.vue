@@ -16,6 +16,7 @@ let {paginateCurrent} = storeToRefs(paginateData)
 let teamsData = ref([])
 let searchData = ref('')
 let searchResult = ref([])
+let searchOpen = ref(false)
 const route = useRoute()
 const {data: teams, loading: isLoading, fetchData: fetchTeams} = useFetch(`football/${route.query.code}`)
 //useFetch
@@ -23,9 +24,10 @@ const {data: teams, loading: isLoading, fetchData: fetchTeams} = useFetch(`footb
 onMounted(async () => {
 	!teams.value.length ? await fetchTeams() : false
 	teamsData.value = teams.value.data
+	searchResult.value = teams.value.data
 	document.addEventListener('click', (e) => {
-		if (!e.target.closest('.teams__search-result')) {
-			searchResult.value = []
+		if (!e.target.closest('.teams__search')) {
+			searchOpen.value = false
 		}
 	})
 })
@@ -56,7 +58,12 @@ let search = async (value: string) => {
 		fetchData: fetchTeams
 	} = useFetch(`football/${route.query.code}/search/${searchData.value}`, `${paginateCurrent.value}`)
 	await fetchTeams()
-	!searchData.value ? searchResult.value = [] : searchResult.value = teams.value.data
+	// !searchData.value ? searchResult.value = [] : searchResult.value = teams.value.data
+	searchResult.value = teams.value.data
+}
+let openResult = () =>{
+	searchOpen.value = true;
+	searchResult.value = teamsData.value.slice(0,4)
 }
 </script>
 <template>
@@ -69,9 +76,9 @@ let search = async (value: string) => {
 					<h2 v-else-if="route.query.code === 'leagues'">Список лиг</h2>
 				</div>
 				<div class="teams__search">
-					<input v-model="searchData" type="text" placeholder="Поиск" @input="search"/>
+					<input v-model="searchData" type="text" placeholder="Поиск" @input="search" @click="openResult"/>
 					<transition name="fade">
-						<TheSearchResult v-if="searchResult.length" class="teams__search-result" :result="searchResult"/>
+						<TheSearchResult v-if="searchOpen" class="teams__search-result" :result="searchResult"/>
 					</transition>
 				</div>
 				<div class="teams__card">
