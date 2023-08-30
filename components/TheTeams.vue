@@ -31,7 +31,7 @@ onMounted(async () => {
 					</div>
 				</div>
 				<div class="teams__button">
-					<nuxt-link to="/category">Смотреть больше</nuxt-link>
+					<nuxt-link :to="{ path: `/category`, query: {code:'teams'} }">Смотреть больше</nuxt-link>
 				</div>
 			</div>
 		</transition>
@@ -41,7 +41,7 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .teams {
-		margin-bottom: 60px;
+		margin-bottom: 40px;
 	&__card {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -51,11 +51,11 @@ onMounted(async () => {
 
 	&__title {
 		text-align: center;
-		margin-bottom: 40px;
+		margin-bottom: 20px;
 	}
 
 	&__button {
-		margin-top: 40px;
+		margin-top: 20px;
 		@include f-s(r-size(18px), 400);
 		padding-right: 10px;
 		text-align: center;

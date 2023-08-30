@@ -16,7 +16,8 @@ let {paginateCurrent} = storeToRefs(paginateData)
 let teamsData = ref([])
 let searchData = ref('')
 let searchResult = ref([])
-const {data: teams, loading: isLoading, fetchData: fetchTeams} = useFetch('football/teams')
+const route = useRoute()
+const {data: teams, loading: isLoading, fetchData: fetchTeams} = useFetch(`football/${route.query.code}`)
 //useFetch
 //onMounted
 onMounted(async () => {
@@ -30,19 +31,18 @@ let paginationCount = async () => {
 		data: teams,
 		loading: isLoading,
 		fetchData: fetchTeams
-	} = useFetch('football/teams', `${paginateCurrent.value}`)
+	} = useFetch(`football/${route.query.code}`, `${paginateCurrent.value}`)
 	await fetchTeams()
 	teamsData.value = teams.value.data
 }
 let search = async (value: string) => {
-	// searchData.value = value
 	const {
 		data: teams,
 		loading: isLoading,
 		fetchData: fetchTeams
-	} = useFetch(`football/teams/search/${searchData.value}`, `${paginateCurrent.value}`)
+	} = useFetch(`football/${route.query.code}/search/${searchData.value}`, `${paginateCurrent.value}`)
 	await fetchTeams()
-	searchResult.value = teams.value.data
+	!searchData.value ? searchResult.value = [] : searchResult.value = teams.value.data
 }
 </script>
 <template>
@@ -54,8 +54,10 @@ let search = async (value: string) => {
 					<h2>Список команд</h2>
 				</div>
 				<div class="teams__search">
-					<input v-model="searchData" type="text" placeholder="Search" @input="search"/>
-					<TheSearchResult class="teams__search-result" :result="searchResult"/>
+					<input v-model="searchData" type="text" placeholder="Поиск" @input="search"/>
+					<transition name="fade">
+						<TheSearchResult v-if="searchResult.length" class="teams__search-result" :result="searchResult"/>
+					</transition>
 				</div>
 				<div class="teams__card">
 					<TheCard v-for="item in teamsData" :key="item.id" :card="item"/>

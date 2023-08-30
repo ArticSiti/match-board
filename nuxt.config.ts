@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     ['nuxt3-lazy-load', {
       directiveOnly: true,
-      defaultImage: '/logo.svg',
     },],
     '@vueuse/nuxt',
   ],

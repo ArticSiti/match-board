@@ -15,16 +15,13 @@
 			<nav class="header__nav">
 				<ul>
 					<li>
-						<nuxt-link to="/statistic">Статистика</nuxt-link>
+						<nuxt-link to="/">Главная</nuxt-link>
 					</li>
 					<li>
-						<nuxt-link to="/livescorers">Текущие результаты</nuxt-link>
+						<nuxt-link :to="{ path: `/category`, query: {code:'teams'} }">Команды</nuxt-link>
 					</li>
 					<li>
-						<nuxt-link to="/standings">Турнирная таблица</nuxt-link>
-					</li>
-					<li>
-						<nuxt-link to="/live-standings">Текущая турнирная таблица</nuxt-link>
+						<nuxt-link :to="{ path: `/category`, query: {code:'leagues'} }">Лиги</nuxt-link>
 					</li>
 				</ul>
 			</nav>
@@ -39,16 +36,26 @@
 	z-index: 150;
 	top: 0;
 	left: 0;
+	border-bottom-left-radius: 16px;
+	border-bottom-right-radius: 16px;
 
 	&__nav ul {
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
 		height: 60px;
-		li a{
+
+		li:not(:first-child) {
+
+				margin-left: 12px;
+
+		}
+
+		li a {
 			color: $lightGray;
 			transition: .3s;
-			&:hover{
+
+			&:hover {
 				color: $black;
 			}
 		}

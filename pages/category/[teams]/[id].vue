@@ -33,25 +33,27 @@ onMounted(async () => {
 						<img :src="detailData.image_path" :alt="detailData.name" v-lazy-load/>
 					</div>
 				</div>
-				<div class="detail__card-title title">
-					<h3>{{ detailData.name }}</h3>
-					<p>Счёт матча<span>{{ detailData.leg }}</span></p>
-				</div>
-				<div class="detail__card-time" v-if="detailData.last_played_at">
-					<p>Время последней игры: {{ detailData.last_played_at }}</p>
-					<p>Дата основания: {{ detailData.founded }}</p>
-					<p>Пол игроков: {{ detailData.gender }}</p>
-				</div>
-				<div class="detail__card-leg" v-if="detailData.leg">
-					<p>Начало матча: {{ detailData.starting_at }}</p>
-				</div>
-				<div class="detail__card-result">
-					<div class="detail__card-result-contain">
-						<p>Номер лиги:{{ detailData.league_id }}</p>
-						<p>Номер сезона:{{ detailData.season_id }}</p>
-						<div class="detail__card-description">
-							<p>Комментарий к матчу</p>
-							<p>{{ detailData.result_info }}</p>
+				<div class="detail__card-right">
+					<div class="detail__card-title title">
+						<h3>{{ detailData.name }}</h3>
+						<p v-if="detailData.leg">Счёт матча<span>{{ detailData.leg }}</span></p>
+					</div>
+					<div class="detail__card-time" v-if="detailData.last_played_at">
+						<p>Время последней игры: {{ detailData.last_played_at }}</p>
+						<p v-if="detailData.founded">Дата основания: {{ detailData.founded }}</p>
+						<p v-if="detailData.gender">Пол игроков: {{ detailData.gender }}</p>
+					</div>
+					<div class="detail__card-leg" v-if="detailData.leg">
+						<p>Начало матча: {{ detailData.starting_at }}</p>
+					</div>
+					<div class="detail__card-result" v-if="detailData.league_id">
+						<div class="detail__card-result-contain">
+							<p>Номер лиги:{{ detailData.league_id }}</p>
+							<p>Номер сезона:{{ detailData.season_id }}</p>
+							<div class="detail__card-description">
+								<p>Комментарий к матчу</p>
+								<p>{{ detailData.result_info }}</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -63,28 +65,32 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .detail__card {
 	background-color: #ffffff;
-	padding: 10px;
+	padding: 20px;
 	border-radius: 16px;
+	&-wrapper{
+		display: grid;
+		grid-template-columns: 10% 90%;
+	}
 
 	&-preview {
 		width: 100%;
 		display: flex;
 		justify-content: center;
+		padding-right: 20px;
 	}
 
 	&-img {
-		width: 300px;
-		height: 300px;
+		width: 150px;
+		height: 150px;
 
 		img {
 			width: 100%;
 			height: 100%;
-			object-fit: cover;
+			object-fit: contain;
 		}
 	}
 
 	&-title {
-		text-align: center;
 		text-transform: uppercase;
 
 		p {
@@ -99,7 +105,6 @@ onMounted(async () => {
 			padding: 10px 0;
 		}
 
-		border-bottom: 1px solid $black;
 	}
 
 	&-subscription {
@@ -108,7 +113,6 @@ onMounted(async () => {
 		&-title {
 			text-align: center;
 			padding-bottom: 10px;
-			border-bottom: 1px solid $black;
 		}
 
 		&-bottom {

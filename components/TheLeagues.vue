@@ -36,12 +36,12 @@ onMounted(async () => {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 		gap: 10px;
-		margin-bottom: 100px;
+		margin-bottom: 60px;
 	}
 
 	&__title {
 		text-align: center;
-		margin-bottom: 40px;
+		margin-bottom: 20px;
 	}
 }
 </style>

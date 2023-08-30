@@ -33,8 +33,7 @@ const {card} = toRefs(props)
 	border-radius: 8px;
 	cursor: pointer;
 	transition: .3s;
-	box-shadow: 4px 6px 10px rgba($black, .5);
-	background-color: rgba($bg-color,.4);
+	background-color: #ffffff;
 	display: flex;
 
 	&:hover {

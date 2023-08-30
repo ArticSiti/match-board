@@ -31,20 +31,28 @@ const props = defineProps({
 .result {
 	margin-top: 20px;
 	width: 100%;
+	height: 500px;
+	overflow: hidden;
+	overflow-y: scroll;
+	border-radius: 16px;
 	box-shadow: 3px 4px 5px $bg-color;
-	background-color: $bg-color;
+	background-color: #ffffff;
+	z-index: 150;
 
 	&__item {
 		width: 100%;
 		display: flex;
 		align-items: center;
-		border-bottom: 1px solid $black;
 		padding: 10px;
 		cursor: pointer;
 		transition: .3s;
 
 		&:hover {
-			background-color: rgba(255, 255, 255, .8);
+			background-color: #54B635FF;
+
+			.result__item-title h2{
+				color: #ffffff;
+			}
 		}
 
 		&-img {

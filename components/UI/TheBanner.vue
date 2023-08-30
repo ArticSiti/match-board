@@ -9,7 +9,7 @@
 </script>
 <template>
 	<div class="banner">
-		<div class="banner__wrapper container">
+		<div class="banner__wrapper">
 			<div class="banner__img">
 				<img src="/img/banner.jpg" alt="" v-lazy-load>
 			</div>
@@ -26,7 +26,7 @@
 	&__wrapper {
 		position: relative;
 		height: 400px;
-		margin-bottom: 100px;
+		margin-bottom: 60px;
 	}
 
 	&__img {
