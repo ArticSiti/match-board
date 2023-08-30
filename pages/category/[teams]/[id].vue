@@ -28,37 +28,30 @@ onMounted(async () => {
 		<transition name="fade">
 			<TheLoading v-if="isLoading"/>
 			<div class="detail__card-wrapper" v-else>
-				<div class="detail__card-preview">
+				<div class="detail__card-preview" v-if="detailData.image_path">
 					<div class="detail__card-img">
 						<img :src="detailData.image_path" :alt="detailData.name" v-lazy-load/>
 					</div>
 				</div>
 				<div class="detail__card-title title">
 					<h3>{{ detailData.name }}</h3>
+					<p>Счёт матча<span>{{ detailData.leg }}</span></p>
 				</div>
-				<div class="detail__card-time">
+				<div class="detail__card-time" v-if="detailData.last_played_at">
 					<p>Время последней игры: {{ detailData.last_played_at }}</p>
 					<p>Дата основания: {{ detailData.founded }}</p>
 					<p>Пол игроков: {{ detailData.gender }}</p>
 				</div>
-				<div class="detail__card-subscription">
-					<div class="detail__card-subscription-title title">
-						<h4>Подписки</h4>
-					</div>
-					<div class="detail__card-subscription-bottom" v-if="subscription[0].plans">
-						<div class="detail__card-subscription-item" v-for="(item,index) in subscription[0].plans" :key="index">
-							<div class="detail__card-subscription-list">
-								<!--							<p>План подписок</p>-->
-								<li>{{ item.plan }}</li>
-							</div>
-							<div class="detail__card-subscription-list">
-								<!--							<p>Категории подписок</p>-->
-								<li>{{ item.category }}</li>
-							</div>
-							<div class="detail__card-subscription-list">
-								<!--							<p>Виды спорта</p>-->
-								<li>{{ item.sport }}</li>
-							</div>
+				<div class="detail__card-leg" v-if="detailData.leg">
+					<p>Начало матча: {{ detailData.starting_at }}</p>
+				</div>
+				<div class="detail__card-result">
+					<div class="detail__card-result-contain">
+						<p>Номер лиги:{{ detailData.league_id }}</p>
+						<p>Номер сезона:{{ detailData.season_id }}</p>
+						<div class="detail__card-description">
+							<p>Комментарий к матчу</p>
+							<p>{{ detailData.result_info }}</p>
 						</div>
 					</div>
 				</div>
@@ -69,7 +62,7 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .detail__card {
-	background-color: $bg-color;
+	background-color: #ffffff;
 	padding: 10px;
 	border-radius: 16px;
 
@@ -93,7 +86,11 @@ onMounted(async () => {
 	&-title {
 		text-align: center;
 		text-transform: uppercase;
-		margin: 12px 0;
+
+		p {
+			display: flex;
+			flex-direction: column;
+		}
 	}
 
 	&-time {
@@ -134,6 +131,20 @@ onMounted(async () => {
 				padding: 10px;
 				@include f-s(r-size(16px), 500)
 			}
+		}
+	}
+
+	&-leg {
+		text-align: center;
+	}
+
+	&-result {
+		margin-top: 12px;
+		display: flex;
+		justify-content: center;
+
+		p {
+			margin-top: 10px;
 		}
 	}
 }

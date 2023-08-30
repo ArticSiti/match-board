@@ -22,11 +22,6 @@ const {card} = toRefs(props)
 				<div class="card__title">
 					<h2>{{ card.name }}</h2>
 				</div>
-				<div class="card__founded">
-					<p>Основан: {{ card.founded }}</p>
-					<p>Последняя игра команды: </p>
-					<p>{{ card.last_played_at }}</p>
-				</div>
 			</div>
 	</div>
 </template>
@@ -40,6 +35,7 @@ const {card} = toRefs(props)
 	transition: .3s;
 	box-shadow: 4px 6px 10px rgba($black, .5);
 	background-color: rgba($bg-color,.4);
+	display: flex;
 
 	&:hover {
 		box-shadow: none;
@@ -51,12 +47,13 @@ const {card} = toRefs(props)
 	}
 
 	&__preview {
+		width: 100px;
 		display: flex;
 		justify-content: center;
 
 		img {
-			width: 100px;
-			height: 100px;
+			width: 40px;
+			height: 40px;
 			object-fit: contain;
 		}
 	}

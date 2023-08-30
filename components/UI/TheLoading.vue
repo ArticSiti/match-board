@@ -28,7 +28,7 @@
 
 .main-loader {
 	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.75);
+	background-color: $bg-color;
 }
 
 .main-fader {
@@ -37,8 +37,8 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 100;
-	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 200;
+	background-color: $bg-color;
 
 	.loader {
 		position: fixed;

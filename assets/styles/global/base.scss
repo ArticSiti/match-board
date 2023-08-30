@@ -15,6 +15,7 @@ body,
 #__layout {
   height: 100%;
   //overflow-x: hidden;
+  background-color: #F3F4F7;
   font-family: 'Lato', sans-serif, -apple-system;
   @include font-rem(16);
   @include mobile {
@@ -46,7 +47,7 @@ li {
 }
 
 .container {
-  width: min(100% - 20px, 1050px);
+  width: min(100% - 20px, 1550px);
   margin-inline: auto;
 }
 

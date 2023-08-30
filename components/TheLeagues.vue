@@ -16,7 +16,7 @@ onMounted(async () => {
 
 </script>
 <template>
-	<div class="leagues container">
+	<div class="leagues">
 		<div class="leagues__title title">
 			<h2>Лиги</h2>
 		</div>

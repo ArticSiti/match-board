@@ -16,7 +16,7 @@ onMounted(async () => {
 
 </script>
 <template>
-	<div class="teams container">
+	<div class="teams">
 		<transition name="fade">
 			<TheLoading v-if="isLoading"/>
 			<div class="teams__wrapper" v-else>
@@ -41,10 +41,11 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .teams {
+		margin-bottom: 60px;
 	&__card {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-		grid-auto-rows: 300px;
+		grid-auto-rows: 100px;
 		gap: 10px;
 	}
 

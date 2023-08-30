@@ -5,6 +5,7 @@ import TheCard from "@/components/TheCard.vue";
 import ThePagination from "../components/UI/ThePagination.vue";
 import {paginateStore} from '~/store/paginate'
 import {storeToRefs} from 'pinia'
+import TheSearchResult from "../components/UI/TheSearchResult.vue";
 
 const paginateData = paginateStore()
 let {paginateCurrent} = storeToRefs(paginateData)
@@ -13,6 +14,8 @@ let {paginateCurrent} = storeToRefs(paginateData)
 
 //data
 let teamsData = ref([])
+let searchData = ref('')
+let searchResult = ref([])
 const {data: teams, loading: isLoading, fetchData: fetchTeams} = useFetch('football/teams')
 //useFetch
 //onMounted
@@ -23,9 +26,23 @@ onMounted(async () => {
 //methods
 let paginationCount = async () => {
 	let currentTotal = paginateCurrent.value
-	const {data: teams, loading: isLoading, fetchData: fetchTeams} = useFetch('football/teams',`${paginateCurrent.value}`)
+	const {
+		data: teams,
+		loading: isLoading,
+		fetchData: fetchTeams
+	} = useFetch('football/teams', `${paginateCurrent.value}`)
 	await fetchTeams()
 	teamsData.value = teams.value.data
+}
+let search = async (value: string) => {
+	// searchData.value = value
+	const {
+		data: teams,
+		loading: isLoading,
+		fetchData: fetchTeams
+	} = useFetch(`football/teams/search/${searchData.value}`, `${paginateCurrent.value}`)
+	await fetchTeams()
+	searchResult.value = teams.value.data
 }
 </script>
 <template>
@@ -35,6 +52,10 @@ let paginationCount = async () => {
 			<div class="teams__wrapper" v-else>
 				<div class="teams__title title">
 					<h2>Список команд</h2>
+				</div>
+				<div class="teams__search">
+					<input v-model="searchData" type="text" placeholder="Search" @input="search"/>
+					<TheSearchResult class="teams__search-result" :result="searchResult"/>
 				</div>
 				<div class="teams__card">
 					<TheCard v-for="item in teamsData" :key="item.id" :card="item"/>
@@ -53,14 +74,13 @@ let paginationCount = async () => {
 .teams {
 	&__card {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-		grid-auto-rows: 300px;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		grid-auto-rows: 100px;
 		gap: 10px;
 	}
 
 	&__title {
 		text-align: center;
-		margin-bottom: 40px;
 	}
 
 	&__button {
@@ -91,6 +111,36 @@ let paginationCount = async () => {
 					right: -40px;
 				}
 			}
+		}
+	}
+
+	&__search {
+		position: relative;
+		display: flex;
+		align-items: center;
+		margin-bottom: 40px;
+
+		input {
+			width: 100%;
+			border-bottom: 1px solid $lightGray;
+			padding: 10px;
+			background: none;
+		}
+
+		&:before {
+			content: '';
+			position: absolute;
+			width: 20px;
+			height: 20px;
+			right: 20px;
+			background-image: url("/img/icons/search.svg");
+			background-repeat: no-repeat;
+			background-size: contain;
+		}
+
+		&-result {
+			position: absolute;
+			top: 20px;
 		}
 	}
 }
